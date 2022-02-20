@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useContext } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import AuthContext from '../../context/auth-context';
 
 // * Reducers
 
@@ -52,6 +53,9 @@ const Login = (props) => {
 		value: '',
 		isValid: false,
 	});
+
+	// ? Managing state with useContext
+	const authCtx = useContext(AuthContext);
 
 	// ? Email handlers
 
@@ -104,7 +108,7 @@ const Login = (props) => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
-		props.onLogin(emailState.value, passwordState.value);
+		authCtx.onLogin(emailState.value, passwordState.value);
 	};
 
 	return (
